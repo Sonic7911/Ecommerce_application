@@ -81,8 +81,9 @@
                     <div class="sidebar__item">
                         <h4>Categories</h4>
                         <ul>
+                            {{-- {{dd(request()->getQueryString())}} --}}
                             @foreach($categories as $category)
-                            <li><a href="#">{{$category->name}}</a></li>
+                            <li ><a class="{{request()->getQueryString()=='category='. $category->slog?'text-primary':''}}" href="/products?category={{$category->slog}}">{{$category->name}}</a></li>
                             @endforeach
                            
                             </ul>
@@ -285,7 +286,7 @@
                         </div>
                     </div>
                     @endforeach
-                   
+                </div>
                 <div class="product__pagination">
                     <a href="#">1</a>
                     <a href="#">2</a>

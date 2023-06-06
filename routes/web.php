@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -35,4 +36,8 @@ Route::get('/home',[HomeController::class, 'index']);
 Route::get('/products',[ProductController::class, 'index']);
 
 Route::get('/products/{slog}',[ProductController::class, 'show']);
+
+Route::post('/cart',[CartController::class,'add']);
+
+Route::get('/show',[CartController::class,'showCart']);
 

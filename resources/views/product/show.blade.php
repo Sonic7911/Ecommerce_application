@@ -112,15 +112,19 @@
                         </div>
                         <div class="product__details__price">{{$product->formatted_amount()}}</div>
                         <p>{{$product->Description}}</p>
+                        <form method="post" action="/cart">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input type="text" value="1" name="quantity">
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CART</a>
+                        <button type="submit" class="primary-btn">ADD TO CART</button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    </form>
                         <ul>
                             <li><b>Availability</b> <span>{{$product->quantity?'In Stock':'Out of Stock'}}</span></li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>

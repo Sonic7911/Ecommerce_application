@@ -39,8 +39,9 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
+                
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{Cart::name('shoppingCart')->getDetails()->get('items_count()')}}</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>$150.00</span></div>
         </div>
@@ -157,9 +158,9 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="/show"><i class="fa fa-shopping-bag"></i> <span>{{Cart::name('shopping')->getDetails()->get('items_count')}}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">item: <span>Rs.{{Cart::name('shopping')->getDetails()->get('total')}}</span></div>
                     </div>
                 </div>
             </div>
