@@ -27,7 +27,29 @@ class CartController extends Controller
 
 public function showCart()
 {
-    return view('cart.cart');
+    $shoppingCart = Cart::name('shopping');
+$items= $shoppingCart->getItems();
+$total= $shoppingCart->getTotal();
+
+$subTotal= $shoppingCart->getSubTotal();
+// dd($items);
+
+    return view('cart.cart',[
+        'items'=>$items,
+        'total'=>$total,
+        'subTotal'=>$subTotal
+    ]);
 
 }
+
+public function deleteCart(Request $request)
+{
+    $hash = $request->itemHash;
+    // dd($hash);
+    $shoppingCart = Cart::name ('shopping');
+    $shoppingCart->removeItem($hash);
+    return back();
+
+}
+
 }
