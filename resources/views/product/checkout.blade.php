@@ -80,117 +80,111 @@
                 </h6>
             </div>
         </div>
+        {{-- @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error )
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif --}}
         <div class="checkout__form">
             <h4>Billing Details</h4>
-            <form action="#">
+            <form action="{{route('checkout.store')}}" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-lg-8 col-md-6">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="checkout__input">
-                                    <p>Fist Name<span>*</span></p>
-                                    <input type="text">
+                                <div class="checkout__input @if($errors->has('first_name')) invalid @endif" >
+                                    <p>First Name<span>*</span></p>
+                                    <input type="text" name="first_name" value="{{old('first_name')}}">
+                                    <small >{{$errors->first('first_name')}}</small>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="checkout__input">
+                                <div class="checkout__input @if($errors->has('last_name')) invalid @endif">
                                     <p>Last Name<span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="last_name" value="{{old('first_name')}}">
+                                    <small >{{$errors->first('last_name')}}</small>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="checkout__input">
+                        <div class="checkout__input @if($errors->has('country')) invalid @endif">
                             <p>Country<span>*</span></p>
-                            <input type="text">
+                            <input type="text" name="country">
+                            <small >{{$errors->first('country')}}</small>
+
                         </div>
-                        <div class="checkout__input">
+                        <div class="checkout__input @if($errors->has('address')) invalid @endif">
                             <p>Address<span>*</span></p>
-                            <input type="text" placeholder="Street Address" class="checkout__input__add">
-                            <input type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                            <input type="text" placeholder="Address" class="checkout__input__add" name="address">
+                            <small >{{$errors->first('address')}}</small>
+
+                          
                         </div>
-                        <div class="checkout__input">
-                            <p>Town/City<span>*</span></p>
-                            <input type="text">
+                        <div class="checkout__input @if($errors->has('district')) invalid @endif">
+                            <p>District<span>*</span></p>
+                            <input type="text" name="district">
+                            <small >{{$errors->first('district')}}</small>
+
                         </div>
-                        <div class="checkout__input">
-                            <p>Country/State<span>*</span></p>
-                            <input type="text">
+                        <div class="checkout__input @if($errors->has('province')) invalid @endif">
+                            <p>Province<span>*</span></p>
+                            <input type="text" name="province">
+                            <small >{{$errors->first('province')}}</small>
+
                         </div>
-                        <div class="checkout__input">
+                        <div class="checkout__input @if($errors->has('zip')) invalid @endif">
                             <p>Postcode / ZIP<span>*</span></p>
-                            <input type="text">
+                            <input type="text" name="zip">
+                            <small >{{$errors->first('zip')}}</small>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="checkout__input">
+                                <div class="checkout__input @if($errors->has('phone')) invalid @endif">
                                     <p>Phone<span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="phone">
+                                <small >{{$errors->first('phone')}}</small>
+
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="checkout__input">
+                                <div class="checkout__input @if($errors->has('email')) invalid @endif">
                                     <p>Email<span>*</span></p>
-                                    <input type="text">
+                                    <input type="text" name="email">
+                                    <small >{{$errors->first('email')}}</small>
                                 </div>
                             </div>
                         </div>
-                        <div class="checkout__input__checkbox">
-                            <label for="acc">
-                                Create an account?
-                                <input type="checkbox" id="acc">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <p>Create an account by entering the information below. If you are a returning customer
-                            please login at the top of the page</p>
-                        <div class="checkout__input">
-                            <p>Account Password<span>*</span></p>
-                            <input type="text">
-                        </div>
-                        <div class="checkout__input__checkbox">
-                            <label for="diff-acc">
-                                Ship to a different address?
-                                <input type="checkbox" id="diff-acc">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                        <div class="checkout__input">
-                            <p>Order notes<span>*</span></p>
-                            <input type="text"
-                                placeholder="Notes about your order, e.g. special notes for delivery.">
-                        </div>
+                       
+                       
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
                             <h4>Your Order</h4>
                             <div class="checkout__order__products">Products <span>Total</span></div>
                             <ul>
-                                <li>Vegetable’s Package <span>$75.99</span></li>
-                                <li>Fresh Vegetable <span>$151.99</span></li>
-                                <li>Organic Bananas <span>$53.99</span></li>
+                                @foreach ($items as $item)
+                                <li>{{$item->getTitle()}} <span>{{$item->getPrice()}}</span></li>
+                               @endforeach
                             </ul>
-                            <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                            <div class="checkout__order__total">Total <span>$750.99</span></div>
-                            <div class="checkout__input__checkbox">
-                                <label for="acc-or">
-                                    Create an account?
-                                    <input type="checkbox" id="acc-or">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+                            <div class="checkout__order__subtotal">Subtotal <span>{{$subTotal}}</span></div>
+                            <div class="checkout__order__total">Total <span>{{$total}}</span></div>
+                            
                             <div class="checkout__input__checkbox">
                                 <label for="payment">
-                                    Check Payment
-                                    <input type="checkbox" id="payment">
+                                    Cash on delievery
+                                    <input type="radio" id="payment" name="payment" value="COD">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="checkout__input__checkbox">
                                 <label for="paypal">
-                                    Paypal
-                                    <input type="checkbox" id="paypal">
+                                    PhonePay
+                                    <input type="radio" id="paypal" name="payment" value="Khalti">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>

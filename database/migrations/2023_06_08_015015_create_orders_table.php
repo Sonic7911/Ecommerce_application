@@ -14,16 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('tracking_id')->unique();
-            $table->int('total');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->integer('total');
+            $table->string('name');
             $table->string('email');
             $table->string('phone');
+            $table->string('status')->default('pending');
             $table->foreignId('billing_id')->constrained('addresses', 'id');
             $table->foreignId('shipping_id')->constrained('addresses', 'id');
-            $table->foreignId('Payment_id')->constrained('payments', 'id');
-
-
+            $table->foreignId('payment_id')->constrained('payments', 'id');
             $table->timestamps();
         });
     }

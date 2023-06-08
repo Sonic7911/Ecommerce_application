@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -45,4 +46,8 @@ Route::get('/show',[CartController::class,'showCart']);
 Route::delete('/cart/remove',[CartController::class,'deleteCart']);
 
 Route::get('/cart/checkout',[CheckoutController::class,'checkout']);
+
+Route::post('/cart/checkout',[CheckoutController::class,'store'])->name('checkout.store');
+
+Route::get('payment/{paymentGateway}',[PaymentController::class, 'show'])->name('payment.show');
 
