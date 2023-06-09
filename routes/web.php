@@ -26,7 +26,7 @@ use App\Http\Controllers\LoginController;
 Route::get('/login',[LoginController::class,'authenticate']);
 Route::get('/category',[CategoryController::class,'getAction']);
 
-Route::get('/home',[HomeController::class, 'index']);
+Route::get('/home',[HomeController::class, 'index'])->name('home');
 
 // Route::get('/about',function(){
 //     // dd("Login Page");
@@ -51,3 +51,4 @@ Route::post('/cart/checkout',[CheckoutController::class,'store'])->name('checkou
 
 Route::get('payment/{paymentGateway}',[PaymentController::class, 'show'])->name('payment.show');
 
+Route::get('payment/thankyou',[PaymentController::class, 'thankyou'])->name('thankyou');

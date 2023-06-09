@@ -99,10 +99,6 @@ class CheckoutController extends Controller
     $shoppingCart->destroy();
 
     //Redirect to Payment Gateway
-    return redirect()->route('payment.show',['paymentGateway'=>$data['payment']]);
-
-
-    }
-
-    //
+    return redirect()->route('payment.show',['paymentGateway'=>$data['payment']])->with(['order_id'=>$order->tracking_id]);
+    } //
 }
